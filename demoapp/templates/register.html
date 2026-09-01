@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <style>
+        body {
+            background: #f0f2f5;
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .signup-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+        .signup-box h2 {
+            text-align: center;
+            margin-bottom: 10px;
+
+        }
+        .signup-box h3{
+            color: rgba(153, 142, 142, 0.85);
+            margin-bottom: 20px;
+
+
+        }
+        .signup-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .signup-box button {
+            width: 100%;
+            padding: 15px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .signup-box a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #2980b9;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <form class="signup-box" method="POST">
+        {% csrf_token %}
+        <h1>Population Growth Prediction<h1>
+        <h3>Predict population trends,literacy,religion & more<h3>
+        <h2>Register</h2>
+        
+        {% if messages %}
+          <ul style="color: red; text-align:center; list-style-type:none;">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password1" placeholder="Password" required>
+        <input type="password" name="password2" placeholder="Confirm Password" required>
+        <button type="submit">Sign Up</button>
+        <a href="{% url 'login' %}">Already have an account? Login</a>
+    </form>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prediction Result</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      padding: 40px;
+    }
+    .container {
+      background: white;
+      max-width: 700px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 { text-align: center; color: #007bff; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 10px 0; }
+    canvas { margin-top: 30px; }
+    a {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      color: #007bff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📊 Prediction for {{ result.State }} in {{ result.Year }}</h2>
+    <ul>
+      <li><b>{{ feature_name }}:</b> {{ pred }}</li>
+      <li><b>Estimated Range:</b> {{ min_val }} – {{ max_val }}</li>
+      {% if result.Population_Growth_Rate %}
+        <li><b>Population Growth Rate:</b> {{ result.Population_Growth_Rate }}%</li>
+      {% endif %}
+    </ul>
+
+    <canvas id="trendChart" width="600" height="300"></canvas>
+
+    <a href="{% url 'predict' %}">🔁 Predict Another  <br> data (in crores)</a>
+  </div>
+
+  <script>
+    const trendYears = {{ trend_years_json|safe }};
+    const trendValues = {{ trend_values_json|safe }};
+    const predictedYear = {{ year|safe }};
+    const predictedValue = {{ pred|safe }};
+    const minValue = {{ min_val|safe }};
+    const maxValue = {{ max_val|safe }};
+
+    const ctx = document.getElementById('trendChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [...trendYears, predictedYear],
+        datasets: [
+          {
+            label: '{{ feature_name }}',
+            data: [...trendValues, predictedValue],
+            borderColor: 'blue',
+            backgroundColor: 'rgba(0, 123, 255, 0.1)',
+            fill: true,
+            tension: 0.2
+          },
+          {
+            label: 'Min Estimate',
+            data: [...Array(trendYears.length).fill(null), minValue],
+            borderColor: 'green',
+            borderDash: [5, 5],
+            fill: false,
+          },
+          {
+            label: 'Max Estimate',
+            data: [...Array(trendYears.length).fill(null), maxValue],
+            borderColor: 'red',
+            borderDash: [5, 5],
+            fill: false,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

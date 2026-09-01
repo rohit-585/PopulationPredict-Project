@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Population Predictor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+    }
+    .container {
+      background: white;
+      max-width: 550px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 { text-align: center; color: #007bff; }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    select, input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+     <h2>Welcome, {{ user.username }}!</h2>
+   
+    <p>You are logged in.</p>
+    <a href="{% url 'logout' %}">Logout</a>
+
+  <div class="container">
+    <h2>📈 Predict Population Details</h2>
+    <form method="POST" action="{% url 'predict' %}">
+      {% csrf_token %}
+
+      <label for="state">Select State:</label>
+      <select name="state" id="state" required>
+        <option value="" disabled selected>-- Select State --</option>
+        {% for state in states %}
+          <option value="{{ state }}">{{ state }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="year">Enter Year (1951–2100):</label>
+      <input type="number" name="year" id="year" min="1951" max="2100" required>
+
+      <label for="growth_type">Select Prediction Type:</label>
+      <select name="growth_type" id="growth_type" required>
+        <option value="all">🔁 All (Recommended)</option>
+        <option value="population">Population</option>
+        <option value="rural">Rural Population</option>
+        <option value="urban">Urban Population</option>
+        <option value="literacy">Literacy Rate</option>
+        <option value="sex_ratio">Sex Ratio</option>
+        <option value="growth">Growth Rate</option>
+      </select>
+
+      <button type="submit">🔍 Predict</button>
+    </form>
+    <form action="{% url 'map-view' %}">
+      <button type="submit" class="map-btn">🗺️ Explore India Data Visualization</button>
+    </form>
+  </div>
+
+</body>
+</html>

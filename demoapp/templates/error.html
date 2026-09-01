@@ -1,0 +1,45 @@
+<!-- demoapp/templates/error.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error - Prediction Failed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fce4e4;
+            color: #a94442;
+            padding: 40px;
+            text-align: center;
+        }
+        .error-box {
+            background-color: #f8d7da;
+            border: 1px solid #f5c2c7;
+            padding: 20px;
+            margin: auto;
+            width: 50%;
+            border-radius: 8px;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #c82333;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #a71d2a;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-box">
+        <h2>❌ Oops! Something went wrong.</h2>
+        <p>{{ msg }}</p>
+        <a href="{% url 'predict_form' %}">🔙 Go back to prediction form</a>
+    </div>
+</body>
+</html>

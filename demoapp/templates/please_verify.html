@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify Email</title>
+    <style>
+        body {
+            background: #f0f2f5;
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .message-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="message-box">
+        <h2>📧 Verify Your Email</h2>
+        <p>We've sent a verification link to your email.</p>
+        <p>Please check your inbox and click the link to activate your account.</p>
+        <a href="{% url 'login' %}">Back to Login</a>
+    </div>
+</body>
+</html>

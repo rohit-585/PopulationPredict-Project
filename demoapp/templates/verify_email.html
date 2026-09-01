@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+        font-family: Arial;
+        background: #f5f5f5;
+        padding: 20px;
+    }
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 500px;
+        margin: auto;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+    a {
+        background: #27ae60;
+        padding: 10px 20px;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        display: inline-block;
+        margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Hello {{ user.username }},</h2>
+    <p>Thanks for signing up! Please verify your email address by clicking below:</p>
+    <a href="{{ link }}">Verify My Email</a>
+    <p>If you didn't sign up, please ignore this email.</p>
+  </div>
+</body>
+</html>
