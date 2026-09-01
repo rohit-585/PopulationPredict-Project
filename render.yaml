@@ -4,5 +4,5 @@ services:
     env: python
     pythonVersion: 3.11
     buildCommand: bash build.sh
-    startCommand: gunicorn mysite.wsgi
+    startCommand: gunicorn mysite.wsgi --chdir ./population\ project/django\ \(2\)/django/mysite
     healthCheckPath: /
